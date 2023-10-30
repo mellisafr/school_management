@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+   <data>
+
+    <record id="school_management_pelajaran_kanban" model="ir.ui.view">
+      <field name="name">school_management.pelajaran.view.kanban</field>
+      <field name="model">school_management.pelajaran</field>
+      <field name="arch" type="xml">
+        <kanban group_create="false">
+          <templates>
+            <t t-name="kanban-box">
+              <div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill o_data_mip_kanban}}">
+                <div class="oe_kanban_details">
+                  <div style="background-color: #f2f2f2;     border: 1px solid #dddddd;     border-radius: 4px;     padding: 10px;     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); color: #333333;" class="o_kanban_tags_section">
+                    <ul>
+                      <li>Mata Pelajaran : <field name="pelajaran"/></li>
+                      <li>Tipe : <field name="tipe_mapel"/></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+	<record id="school_management_pelajaran_tree"  model="ir.ui.view">
+		<field name="name">pelajaran</field>
+		<field name="model">school_management.pelajaran</field>
+		<field name="arch" type="xml">
+			<tree string="Pelajaran">
+				<field name="pelajaran"/>
+                <field name="tipe_mapel"/>
+                <field name="guru_ids"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="school_management_pelajaran_search" model="ir.ui.view">
+		<field name="name">school_management.pelajaran_search</field>
+		<field name="model">school_management.pelajaran</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name="pelajaran" optional="show"/>
+			</search>
+		</field>
+	</record>
+
+	<record id="school_management_pelajaran_form" model="ir.ui.view">
+		<field name="name">Pelajaran</field>
+		<field name="model">school_management.pelajaran</field>
+		<field name="arch" type="xml">
+			<form string="Idea form">
+				<sheet>
+            <group string="Mata Pelajaran">
+                <field name="pelajaran" string="Mata Pelajaran"/>
+                <field name="tipe_mapel" string="Tipe"/>
+            </group>
+            <notebook>
+                <page name="Daftar Guru" string="Daftar Guru">
+                    <field name="guru_ids" string="Nama Guru"></field>
+                </page>
+            </notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+    <!-- Add you code here -->
+    <record id="action_pelajaran" model="ir.actions.act_window">
+        <field name="name">Pelajaran</field>
+        <field name="res_model">school_management.pelajaran</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_ids"
+            eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('school_management_pelajaran_kanban')}),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('school_management_pelajaran_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('school_management_pelajaran_form')})]" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Buat Pelajaran Baru</p>
+        </field>
+    </record>
+            
+   </data>
+</odoo>

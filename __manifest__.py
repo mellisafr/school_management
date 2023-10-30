@@ -1,0 +1,26 @@
+{
+    'name': "School Management",
+    'version': "1.0",
+    'author': "Mellisa Fitriana",
+    'category': "Uncategorized",
+    'support': "mellisafrr@gmail.com",
+    'summary': "School Management",
+    'description': "School Management",
+    'depends': ['base'],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/config/kelas.xml',
+        'views/config/gedung.xml',
+        'views/config/guru.xml',
+        'views/config/pelajaran.xml',
+        'views/config/murid.xml',
+        'views/presensi.xml',
+        'views/kehadiran.xml',
+        'views/menu.xml'
+    ],
+    'demo': [],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+    'icon': 'static/src/school.png',
+}

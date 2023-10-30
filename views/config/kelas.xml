@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+   <data>
+
+    <record id="school_management_kelas_kanban" model="ir.ui.view">
+      <field name="name">school_management.kelas.view.kanban</field>
+      <field name="model">school_management.kelas</field>
+      <field name="arch" type="xml">
+        <kanban group_create="false">
+          <templates>
+            <t t-name="kanban-box">
+              <div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill o_data_mip_kanban}}">
+                <div class="oe_kanban_details">
+                  <div style="background-color: #f2f2f2;     border: 1px solid #dddddd;     border-radius: 4px;     padding: 10px;     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); color: #333333;" class="o_kanban_tags_section">
+                    <ul>
+                      <li>Kelas : <field name="kelas"/></li>
+                      <li>Wali Kelas: <field name="wali_kelas_id"/></li>
+                      <li>Murid : <field name="jumlah_murid"/></li>
+                      <li>Letak : <field name="gedung_id"/></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+	<record id="school_management_kelas_tree"  model="ir.ui.view">
+		<field name="name">Kelas</field>
+		<field name="model">school_management.kelas</field>
+		<field name="arch" type="xml">
+			<tree string="Kelas">
+				<field name="kelas"/>
+				<field name="wali_kelas_id"/>
+        <field name="jumlah_murid"/>
+        <field name="gedung_id"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="school_management_kelas_search" model="ir.ui.view">
+		<field name="name">school_management.kelas_search</field>
+		<field name="model">school_management.kelas</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name="kelas" optional="show"/>
+				<field name="wali_kelas_id" optional="show"/>
+				<field name="jumlah_murid" optional="show"/>
+			</search>
+		</field>
+	</record>
+
+	<record id="school_management_kelas_form" model="ir.ui.view">
+		<field name="name">Kelas</field>
+		<field name="model">school_management.kelas</field>
+		<field name="arch" type="xml">
+			<form string="Idea form">
+				<sheet>
+                    <group string="Kelas">
+                        <field name="tingkat" string="Tingkat"/>
+                        <field name="jurusan" string="Jurusan"/>
+                        <field name="rombel" string="Rombel"/>
+                        <field name="kelas" string="Kelas" readonly="1" force_save="1"/>
+                        <field name="wali_kelas_id" string="Wali Kelas"/>
+                        <field name="jumlah_murid" string="Jumlah Murid"/>
+                        <field name="gedung_id" string="Letak"/>
+                    </group>
+                    <notebook>
+                        <page name="murid" string="Murid">
+                            <field name="murid_ids" string="Murid"/>
+                        </page>
+                    </notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+    <!-- Add you code here -->
+    <record id="action_kelas" model="ir.actions.act_window">
+        <field name="name">Kelas</field>
+        <field name="res_model">school_management.kelas</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_ids"
+            eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('school_management_kelas_kanban')}),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('school_management_kelas_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('school_management_kelas_form')})]" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Buat Kelas Baru</p>
+        </field>
+    </record>
+            
+   </data>
+</odoo>

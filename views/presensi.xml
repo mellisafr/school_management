@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+   <data>
+
+    <record id="school_management_presensi_kanban" model="ir.ui.view">
+      <field name="name">school_management.presensi.view.kanban</field>
+      <field name="model">school_management.presensi</field>
+      <field name="arch" type="xml">
+        <kanban group_create="false">
+          <templates>
+            <t t-name="kanban-box">
+              <div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill o_data_mip_kanban}}">
+                <div class="oe_kanban_details">
+                  <div style="background-color: #f2f2f2;     border: 1px solid #dddddd;     border-radius: 4px;     padding: 10px;     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); color: #333333;" class="o_kanban_tags_section">
+                    <ul>
+                      <li>Tanggal : <field name="tanggal"/></li>
+                      <li>Kelas : <field name="kelas_id"/></li>
+                      <li>Pelajaran : <field name="pelajaran_id"/></li>
+                      <li>Guru : <field name="guru_id"/></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+	<record id="school_management_presensi_tree"  model="ir.ui.view">
+		<field name="name">presensi</field>
+		<field name="model">school_management.presensi</field>
+		<field name="arch" type="xml">
+			<tree string="Presensi">
+				<field name="tanggal"/>
+				<field name="kelas_id"/>
+        <field name="pelajaran_id"/>
+        <field name="guru_id"/>
+        <field name="kehadiran_ids"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="school_management_presensi_search" model="ir.ui.view">
+		<field name="name">school_management.presensi_search</field>
+		<field name="model">school_management.presensi</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name="kelas_id" optional="show"/>
+				<field name="pelajaran_id" optional="show"/>
+				<field name="guru_id" optional="show"/>
+			</search>
+		</field>
+	</record>
+
+	<record id="school_management_presensi_form" model="ir.ui.view">
+		<field name="name">presensi</field>
+		<field name="model">school_management.presensi</field>
+		<field name="arch" type="xml">
+			<form string="Idea form">
+        <header>
+            <field name="status_presensi" widget="statusbar" statusbar_visible="rancangan, selesai"/>
+            <button name="action_selesai" string= "SELESAI" class="btn-primary" type="object"/>
+        </header>
+				<sheet>
+                    <group string="Data Presensi">
+                        <field name="tanggal" string="Tanggal"/>
+                        <field name="kelas_id" string="Kelas"/>
+                        <field name="pelajaran_id" string="Pelajaran"/>
+                        <field name="guru_id" string="Guru"/>
+                        <field name="bukti_presensi" string="Bukti Presensi" widget="image"/>
+                    </group>
+                    <notebook>
+                        <page name="Kehadiran" string="Kehadiran">
+                            <field name="kehadiran_ids" string="Kehadiran Siswa"></field>
+                        </page>
+                    </notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+    <!-- Add you code here -->
+    <record id="action_presensi" model="ir.actions.act_window">
+        <field name="name">Presensi</field>
+        <field name="res_model">school_management.presensi</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_ids"
+            eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('school_management_presensi_kanban')}),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('school_management_presensi_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('school_management_presensi_form')})]" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Buat Presensi Baru</p>
+        </field>
+    </record>
+            
+   </data>
+</odoo>

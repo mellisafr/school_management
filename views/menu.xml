@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+
+        <menuitem
+            id="school_management"
+            name="School"
+            sequence="1"/>
+        <menuitem
+            id="school_management_presensi"
+            name="Presensi"
+            parent="school_management"
+            sequence="2"
+            action="action_presensi"/>
+        <menuitem
+            id="school_management_kehadiran"
+            name="Kehadiran"
+            parent="school_management"
+            sequence="3"
+            action="action_kehadiran"/>
+        <menuitem 
+            id="school_management_config" 
+            name="Config" 
+            parent="school_management" 
+            sequence="4"/>
+        <menuitem
+            id="school_management_kelas"
+            name="Kelas"
+            parent="school_management_config"
+            sequence="5"
+            action="action_kelas"/>
+        <menuitem
+            id="school_management_gedung"
+            name="Gedung"
+            parent="school_management_config"
+            sequence="6"
+            action="action_gedung"/>
+        <menuitem
+            id="school_management_guru"
+            name="Guru"
+            parent="school_management_config"
+            sequence="7"
+            action="action_guru"/>
+        <menuitem
+            id="school_management_pelajaran"
+            name="Pelajaran"
+            parent="school_management_config"
+            sequence="8"
+            action="action_pelajaran"/>
+        <menuitem
+            id="school_management_murid"
+            name="Murid"
+            parent="school_management_config"
+            sequence="9"
+            action="action_murid"/>
+
+    </data>
+</odoo>

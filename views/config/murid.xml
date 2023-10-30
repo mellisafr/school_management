@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+   <data>
+
+    <record id="school_management_murid_kanban" model="ir.ui.view">
+      <field name="name">school_management.murid.view.kanban</field>
+      <field name="model">school_management.murid</field>
+      <field name="arch" type="xml">
+        <kanban group_create="false">
+          <templates>
+            <t t-name="kanban-box">
+              <div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill o_data_mip_kanban}}">
+                <div class="oe_kanban_details">
+                  <div style="background-color: #f2f2f2;     border: 1px solid #dddddd;     border-radius: 4px;     padding: 10px;     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); color: #333333;" class="o_kanban_tags_section">
+                    <ul>
+                      <li>Nama Murid : <field name="nama_murid"/></li>
+                      <li>Kelas : <field name="kelas_id"/></li>
+                      <li>Gender : <field name="gender"/></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+	<record id="school_management_murid_tree"  model="ir.ui.view">
+		<field name="name">Murid</field>
+		<field name="model">school_management.murid</field>
+		<field name="arch" type="xml">
+			<tree string="Murid">
+				<field name="nama_murid"/>
+                <field name="kelas_id"/>
+                <field name="gender"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="school_management_murid_search" model="ir.ui.view">
+		<field name="name">school_management.murid_search</field>
+		<field name="model">school_management.murid</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name="nama_murid" optional="show"/>
+			</search>
+		</field>
+	</record>
+
+	<record id="school_management_murid_form" model="ir.ui.view">
+		<field name="name">Murid</field>
+		<field name="model">school_management.murid</field>
+		<field name="arch" type="xml">
+			<form string="Idea form">
+				<sheet>
+                    <group string="Data Murid">
+                        <field name="nama_murid" string="Nama Murid"/>
+                        <field name="kelas_id" string="Kelas"/>
+                        <field name="gender" string="Gender"/>
+                    </group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+    <!-- Add you code here -->
+    <record id="action_murid" model="ir.actions.act_window">
+        <field name="name">Murid</field>
+        <field name="res_model">school_management.murid</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_ids"
+            eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('school_management_murid_kanban')}),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('school_management_murid_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('school_management_murid_form')})]" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Buat Murid Baru</p>
+        </field>
+    </record>
+            
+   </data>
+</odoo>
